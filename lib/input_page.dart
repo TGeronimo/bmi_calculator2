@@ -18,6 +18,8 @@ enum Gender { male, female }
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 14;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class _InputPageState extends State<InputPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
+            flex: 1,
             child: Row(
               children: [
                 Expanded(
@@ -51,6 +54,7 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ),
                 Expanded(
+                  flex: 1,
                   child: ReusableCard(
                     onPress: () {
                       setState(() {
@@ -70,6 +74,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
+            flex: 1,
             child: ReusableCard(
               colour: kActiveCardColor,
               cardChild: Column(
@@ -121,16 +126,91 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
+            flex: 1,
             child: Row(
               children: [
                 Expanded(
                   child: ReusableCard(
                     colour: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'PESO',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundActionButton(
+                              icon: FontAwesomeIcons.minus,
+                              onClick: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundActionButton(
+                              icon: FontAwesomeIcons.plus,
+                              onClick: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     colour: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'IDADE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundActionButton(
+                              icon: FontAwesomeIcons.minus,
+                              onClick: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundActionButton(
+                              icon: FontAwesomeIcons.plus,
+                              onClick: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -153,6 +233,30 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RoundActionButton extends StatelessWidget {
+  const RoundActionButton({required this.icon, required this.onClick});
+
+  final IconData icon;
+  final VoidCallback onClick;
+  // I had a rendering error when using Function as the type
+  // of onClick, so I used VoidCallback as a workaround.
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      elevation: 6.0,
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      onPressed: onClick,
     );
   }
 }
