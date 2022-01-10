@@ -10,6 +10,11 @@ const kNumberStyle = TextStyle(
   fontWeight: FontWeight.w900,
 );
 
+const kBottomResultButtonText = TextStyle(
+  fontSize: 32,
+  fontWeight: FontWeight.bold,
+);
+
 const kActiveCardColor = Color(0xFF1D1E33);
 const kInactiveCardColor = Color(0xFF111328);
 const kBottomContainerColor = Color(0xFFAD375B);

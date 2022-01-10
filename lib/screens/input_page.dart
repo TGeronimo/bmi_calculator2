@@ -1,11 +1,11 @@
-import 'package:bmi_calculator/results_page.dart';
+import 'package:bmi_calculator/components/constants.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/components/round_action_button.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'results_page.dart';
-
-import 'card_content.dart';
-import 'constants.dart';
-import 'reusable_card.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/card_content.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -217,55 +217,17 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            buttonTitle: "CALCULAR",
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ResultsPage()),
               );
             },
-            child: Container(
-              margin: EdgeInsets.only(top: 10.0),
-              color: kBottomContainerColor,
-              height: kBottomContainerHeight,
-              width: double.infinity,
-              child: const Center(
-                child: Text(
-                  'CALCULAR',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class RoundActionButton extends StatelessWidget {
-  const RoundActionButton({required this.icon, required this.onClick});
-
-  final IconData icon;
-  final VoidCallback onClick;
-  // I had a rendering error when using Function as the type
-  // of onClick, so I used VoidCallback as a workaround.
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      elevation: 6.0,
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-      onPressed: onClick,
     );
   }
 }
